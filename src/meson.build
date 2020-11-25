@@ -1,5 +1,6 @@
 blinky_stm32l4r5zi = executable('blinky_stm32l4r5zi',
 	files('main.cpp'),
+	cpp_args: desired_cpp_compile_flags,
 	dependencies: [
 		nucleo_l4r5zi_dep,
 	],

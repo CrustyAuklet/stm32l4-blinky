@@ -15,10 +15,14 @@ project('PROJECT_NAME',
 	version: '0.1'
 )
 
-embvm_core_subproject = subproject('nucleo_l4r5zi')
-nucleo_l4r5zi_dep = embvm_core_subproject.get_variable('nucleo_l4r5zi_demo_platform_dep')
-host_map_file = embvm_core_subproject.get_variable('host_map_file')
-host_hex_conversion = embvm_core_subproject.get_variable('host_hex_conversion')
-host_bin_conversion = embvm_core_subproject.get_variable('host_bin_conversion')
+nucleo_l4r5zi_subproject = subproject('nucleo_l4r5zi')
+nucleo_l4r5zi_dep = nucleo_l4r5zi_subproject.get_variable('nucleo_l4r5zi_demo_platform_dep')
+host_map_file = nucleo_l4r5zi_subproject.get_variable('host_map_file')
+host_hex_conversion = nucleo_l4r5zi_subproject.get_variable('host_hex_conversion')
+host_bin_conversion = nucleo_l4r5zi_subproject.get_variable('host_bin_conversion')
+
+desired_common_compile_flags = nucleo_l4r5zi_subproject.get_variable('desired_common_compile_flags')
+desired_cpp_compile_flags = nucleo_l4r5zi_subproject.get_variable('desired_cpp_compile_flags')
+desired_native_cpp_compile_flags = nucleo_l4r5zi_subproject.get_variable('desired_native_cpp_compile_flags')
 
 subdir('src')

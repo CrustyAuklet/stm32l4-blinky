@@ -1,3 +1,6 @@
+option('dev-board', type: 'boolean', value: true,
+    description: 'Build for the dev board')
+
 option('disable-builtins', type: 'boolean', value: false,
     description: 'Tell the compiler not to generate builtin functions.',
     yield: true)
