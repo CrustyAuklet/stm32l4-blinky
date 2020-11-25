@@ -1,0 +1,36 @@
+# Embedded Virtual Machine Settings
+# This file specifies that the embvm builds will use
+# the proper libc and libcpp dependencies. You can select alternative
+# dependencies by using a different wrap file, or overriding the options
+# using wrap file composition.
+
+[binaries]
+c = 'arm-none-eabi-gcc'
+cpp = 'arm-none-eabi-c++'
+# *-gcc-ar is used over *-ar to support LTO flags. 
+# Without -gcc-ar, LTO will generate a linker warning:
+# arm-none-eabi-ar: file.o: plugin needed to handle lto object
+ar = 'arm-none-eabi-gcc-ar'
+strip = 'arm-none-eabi-strip'
+
+[properties]
+c_stdlib = ['libc', 'libc_dep']
+cpp_stdlib = ['libcpp', 'libcxx_full_dep']
+objcopy = 'arm-none-eabi-objcopy'
+# Flags used when checking for supported linker arguments
+# Use this property when flag checks fail due to linker errors with ARM GCC
+get_supported_link_arg_flags = ['--specs=nosys.specs']
+# Keep this set, or the sanity check won't pass
+needs_exe_wrapper = true
+c_args = [ '-mcpu=cortex-m4', '-mfloat-abi=hard', '-mfpu=fpv4-sp-d16', '-mabi=aapcs', '-mthumb',]
+c_link_args = [ '-mcpu=cortex-m4', '-mfloat-abi=hard', '-mfpu=fpv4-sp-d16', '-mabi=aapcs', '-mthumb',]
+cpp_args = [ '-mcpu=cortex-m4', '-mfloat-abi=hard', '-mfpu=fpv4-sp-d16', '-mabi=aapcs', '-mthumb',]
+cpp_link_args = [ '-mcpu=cortex-m4', '-mfloat-abi=hard', '-mfpu=fpv4-sp-d16', '-mabi=aapcs', '-mthumb',]
+
+[host_machine]
+cpu = 'cortex-m4'
+endian = 'little'
+system = 'none'
+cpu_family = 'arm'
+# CPU should be redefined in child cross files - this is a placeholder
+# that will be used in case a child file does not override this setting

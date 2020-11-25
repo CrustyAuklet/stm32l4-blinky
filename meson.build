@@ -1,0 +1,24 @@
+project('PROJECT_NAME',
+	['c', 'cpp'],
+	default_options : [
+		'warning_level=3',
+		'werror=false',
+		# This project defaults to a release build
+		'debug=false',
+		'optimization=2',
+		# `build.*` options affect `native: true targets`
+		# plain options affect `native: false` targets.
+		'c_std=c11', 'build.c_std=c11',
+		'cpp_std=c++17', 'build.cpp_std=c++17',
+	],
+	meson_version: '>=0.56.0',
+	version: '0.1'
+)
+
+embvm_core_subproject = subproject('nucleo_l4r5zi')
+nucleo_l4r5zi_dep = embvm_core_subproject.get_variable('nucleo_l4r5zi_demo_platform_dep')
+host_map_file = embvm_core_subproject.get_variable('host_map_file')
+host_hex_conversion = embvm_core_subproject.get_variable('host_hex_conversion')
+host_bin_conversion = embvm_core_subproject.get_variable('host_bin_conversion')
+
+subdir('src')
